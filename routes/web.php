@@ -8,6 +8,7 @@ use App\Http\Livewire\Auth\Passwords\Email;
 use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes(['verify' => true]);
+
 Route::view('/', 'welcome')->name('home');
 
 Route::middleware('guest')->group(function () {
@@ -32,7 +35,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::get('password/reset', Email::class)
-    ->name('password.request');
+    ->name('password.request')->middleware('verified');
 
 Route::get('password/reset/{token}', Reset::class)
     ->name('password.reset');
