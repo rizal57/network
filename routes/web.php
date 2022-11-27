@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -40,13 +41,16 @@ Route::get('password/reset', Email::class)
 Route::get('password/reset/{token}', Reset::class)
     ->name('password.reset');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('email/verify', Verify::class)
         ->middleware('throttle:6,1')
         ->name('verification.notice');
 
     Route::get('password/confirm', Confirm::class)
         ->name('password.confirm');
+
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('profile/settings', [ProfileController::class, 'edit'])->name('profile.edit');
 });
 
 Route::middleware('auth')->group(function () {

@@ -40,7 +40,7 @@
                     class="absolute bg-white shadow-md rounded-md top-full right-0 border">
                     <ul>
                         <li>
-                            <a href="" class="block text-slate-500 hover:text-blue-500 hover:bg-slate-100 py-2 px-4 transition duration-300 ease-out">Profile</a>
+                            <a href="{{ route('profile.index') }}" class="block text-slate-500 hover:text-blue-500 hover:bg-slate-100 py-2 px-4 transition duration-300 ease-out">Profile</a>
                         </li>
                         <li>
                             <a href="" class="block text-slate-500 hover:text-blue-500 hover:bg-slate-100 py-2 px-4 transition duration-300 ease-out">Dashboard</a>
