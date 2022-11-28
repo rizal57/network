@@ -9,6 +9,7 @@ use App\Http\Livewire\Auth\Passwords\Email;
 use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
+use App\Http\Livewire\Dashboard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,15 +43,14 @@ Route::get('password/reset/{token}', Reset::class)
     ->name('password.reset');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('email/verify', Verify::class)
-        ->middleware('throttle:6,1')
-        ->name('verification.notice');
+    Route::get('email/verify', Verify::class)->middleware('throttle:6,1')->name('verification.notice');
 
-    Route::get('password/confirm', Confirm::class)
-        ->name('password.confirm');
+    Route::get('password/confirm', Confirm::class)->name('password.confirm');
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/settings', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    Route::get('dashboard', Dashboard::class)->name('dashboard');
 });
 
 Route::middleware('auth')->group(function () {
