@@ -20,11 +20,11 @@
                     </span>
                 </a>
                 <a
-                    href="{{ route('timeline') }}"
-                    class="{{ Request::is('timeline') ? 'before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-500 text-white hover:text-white' : 'hover:text-blue-500' }}  relative inline-block transition ease-out duration-300 text-slate-600"
+                    href="{{ route('status.index') }}"
+                    class="{{ Request::is('status*') ? 'before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-500 text-white hover:text-white' : 'hover:text-blue-500' }}  relative inline-block transition ease-out duration-300 text-slate-600"
                 >
                     <span class="relative">
-                        Timeline
+                        Status
                     </span>
                 </a>
             </div>

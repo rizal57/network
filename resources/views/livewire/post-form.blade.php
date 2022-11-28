@@ -13,7 +13,7 @@
                         <textarea
                             class="w-full rounded-md border-slate-400 resize-none focus:border-slate-200 focus:ring-blue-500 focus:shadow-lg focus:shadow-blue-500/10 transition ease-out duration-300 placeholder:text-slate-400 text-base text-slate-500"
                             wire:model.lazy="body"
-                            placeholder="What is your mind..."
+                            placeholder="What's in your mind..."
                         ></textarea>
                         <div class="text-end">
                             <x-button-primary>Post</x-button-primary>
