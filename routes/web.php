@@ -10,6 +10,7 @@ use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Timeline;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('profile/settings', [ProfileController::class, 'edit'])->name('profile.edit');
 
     Route::get('dashboard', Dashboard::class)->name('dashboard');
+
+    Route::get('timeline', Timeline::class)->name('timeline');
 });
 
 Route::middleware('auth')->group(function () {
