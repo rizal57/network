@@ -33,7 +33,13 @@
                 <img src="http://www.gravatar.com/avatar/?d=mp" class="w-10 h-10 rounded-full" alt="">
             </div>
             <div>
-                <h1 class="text-slate-600 font-semibold text-base">{{ auth()->user()->name }}</h1>
+                <div class="flex gap-1 items-center">
+                    <h1 class="text-slate-600 font-semibold text-base">{{ auth()->user()->name }}</h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                    </svg>
+                    <span class="text-slate-500 text-sm">{{ $status->created_at->diffForHumans() }}</span>
+                </div>
                 <p class="text-slate-500 text-base">{!! $status->body !!}</p>
                 <div class="flex gap-8 items-center mt-4">
                     <button class="flex gap-1 items-center text-slate-500">
