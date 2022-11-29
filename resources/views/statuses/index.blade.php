@@ -10,7 +10,10 @@
                     <livewire:statuses />
                 </div>
                 <div class="col-span-4">
-                    <h1>recently join</h1>
+                    <div class="border border-slate-300 py-2 px-4 rounded-md">
+                        <h1 class="text-slate-500 font-semibold text-base mb-3">Recently Join</h1>
+                        <livewire:users />
+                    </div>
                 </div>
             </div>
         </div>
