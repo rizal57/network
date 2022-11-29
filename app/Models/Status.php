@@ -28,4 +28,14 @@ class Status extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function like()
+    {
+        return $this->hasOne(Like::class);
+    }
+
+    public function totalLike()
+    {
+        return $this->hasMany(Like::class)->count();
+    }
 }

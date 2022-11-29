@@ -3,12 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Status;
 use Livewire\Component;
 
 class Statuses extends Component
 {
-    public $statuses, $status_id, $body, $limit = 10;
+    public $statuses, $status_id, $body, $limit = 10, $likes;
     protected $listeners = [
         'statusPosted' => 'render',
     ];
@@ -16,7 +17,6 @@ class Statuses extends Component
     public function render()
     {
         $this->statuses = Status::with('user')->limit($this->limit)->latest()->get();
-        // $this->body = $this->statuses->body;
         return view('livewire.statuses');
     }
 
@@ -44,5 +44,18 @@ class Statuses extends Component
     public function loadMore()
     {
         $this->limit += 10;
+    }
+
+    public function like($id)
+    {
+        $like = Like::where('status_id', $id)->where('user_id', auth()->user()->id)->first();
+        if($like) {
+            $like->delete();
+        } else {
+            Like::create([
+                'status_id' => $id,
+                'user_id' => auth()->user()->id,
+            ]);
+        }
     }
 }
