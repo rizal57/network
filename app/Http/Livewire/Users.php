@@ -17,5 +17,7 @@ class Users extends Component
     public function follow(User $user)
     {
         auth()->user()->following()->where('following_user_id', $user->id)->first() ? auth()->user()->following()->detach($user) : auth()->user()->following()->save($user);
+
+        $this->emit('follows');
     }
 }

@@ -12,11 +12,13 @@ class Statuses extends Component
     public $statuses, $status_id, $body, $limit = 10, $likes;
     protected $listeners = [
         'statusPosted' => 'render',
+        'follows' => 'render',
     ];
 
     public function render()
     {
-        $this->statuses = Status::with('user')->limit($this->limit)->latest()->get();
+        $following = auth()->user()->following->pluck('id');
+        $this->statuses = Status::whereIn('user_id', $following)->orWhere('user_id', auth()->user()->id)->limit($this->limit)->latest()->get();
         return view('livewire.statuses');
     }
 
