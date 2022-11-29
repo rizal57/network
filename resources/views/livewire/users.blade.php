@@ -1,6 +1,6 @@
 <div>
     @foreach ($users as $user)
-        <div class="bg-white shadow-md shadow-blue-500/10 py-2 px-3 rounded-md mb-3 overflow-hidden">
+        <div class="bg-white drop-shadow-md py-2 px-3 rounded-md mb-3 overflow-hidden">
             <div class="flex gap-2 items-start">
                 <div class="flex-shrink-0">
                     <img src="http://www.gravatar.com/avatar/?d=mp" class="w-9 h-9 rounded-full" alt="">

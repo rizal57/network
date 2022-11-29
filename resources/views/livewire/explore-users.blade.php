@@ -10,7 +10,7 @@
         </div>
         <div class="mt-8 grid grid-cols-4 gap-3">
             @foreach ($users as $user)
-                <div class="bg-white shadow-lg shadow-blue-500/20 py-2 px-3 rounded-md mb-3 overflow-hidden">
+                <div class="bg-white drop-shadow-lg py-2 px-3 rounded-md mb-3 overflow-hidden">
                     <div class="flex gap-2 items-start">
                         <div class="flex-shrink-0">
                             <img src="http://www.gravatar.com/avatar/?d=mp" class="w-9 h-9 rounded-full" alt="">
