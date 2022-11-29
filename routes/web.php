@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Livewire\Auth\Login;
@@ -53,6 +54,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('profile/settings', [ProfileController::class, 'edit'])->name('profile.edit');
 
     Route::get('dashboard', Dashboard::class)->name('dashboard');
+    Route::get('dashboard/follower', [DashboardController::class, 'follower'])->name('dashboard.follower');
+    Route::get('dashboard/following', [DashboardController::class, 'following'])->name('dashboard.following');
+    Route::post('dashboard/follower', [DashboardController::class, 'store'])->name('dashboard.store');
 
     Route::resource('status', StatusController::class);
 });
