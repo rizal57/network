@@ -31,7 +31,7 @@ class Status extends Model
 
     public function like()
     {
-        return $this->hasOne(Like::class);
+        return $this->hasOne(Like::class)->where('user_id', auth()->user()->id);
     }
 
     public function totalLike()
