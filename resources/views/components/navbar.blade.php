@@ -27,6 +27,14 @@
                         Status
                     </span>
                 </a>
+                <a
+                    href="{{ route('explore.users') }}"
+                    class="{{ Request::is('explore-users*') ? 'before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-500 text-white hover:text-white' : 'hover:text-blue-500' }}  relative inline-block transition ease-out duration-300 text-slate-600"
+                >
+                    <span class="relative">
+                        Explore Users
+                    </span>
+                </a>
             </div>
         </div>
         <div>

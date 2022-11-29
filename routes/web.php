@@ -12,6 +12,7 @@ use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\ExploreUsers;
 use App\Http\Livewire\Timeline;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -50,15 +51,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('password/confirm', Confirm::class)->name('password.confirm');
 
-    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::get('profile/settings', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::prefix('profile')->group(function() {
+        Route::get('', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('/settings', [ProfileController::class, 'edit'])->name('profile.edit');
+    });
 
-    Route::get('dashboard', Dashboard::class)->name('dashboard');
-    Route::get('dashboard/follower', [DashboardController::class, 'follower'])->name('dashboard.follower');
-    Route::get('dashboard/following', [DashboardController::class, 'following'])->name('dashboard.following');
-    Route::post('dashboard/follower', [DashboardController::class, 'store'])->name('dashboard.store');
+    Route::prefix('dashboard')->group(function() {
+        Route::get('', Dashboard::class)->name('dashboard');
+        Route::get('/follower', [DashboardController::class, 'follower'])->name('dashboard.follower');
+        Route::get('/following', [DashboardController::class, 'following'])->name('dashboard.following');
+        Route::post('/follower', [DashboardController::class, 'store'])->name('dashboard.store');
+    });
 
     Route::resource('status', StatusController::class);
+
+    Route::get('explore-users', ExploreUsers::class)->name('explore.users');
 });
 
 Route::middleware('auth')->group(function () {
