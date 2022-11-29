@@ -14,17 +14,17 @@
                         <span class="text-slate-500 text-sm">{{ $status->created_at->diffForHumans() }}</span>
                     </div>
                     <div>
-                        @if ($status_id)
-                        <form action="" wire:submit.prevent="updateStatus({{ $status->id }})">
-                            <textarea
-                                class="w-full rounded-md border-slate-400 resize-none focus:border-slate-200 focus:ring-blue-500 focus:shadow-lg focus:shadow-blue-500/10 transition ease-out duration-300 placeholder:text-slate-400 text-base text-slate-500"
-                                wire:model.lazy="body"
-                                placeholder="What's in your mind..."
-                            ></textarea>
-                            <div class="text-end">
-                                <x-button-primary>Save</x-button-primary>
-                            </div>
-                        </form>
+                        @if ($status_id === $status->id)
+                            <form action="" wire:submit.prevent="updateStatus({{ $status->id }})">
+                                <textarea
+                                    class="w-full rounded-md border-slate-400 resize-none focus:border-slate-200 focus:ring-blue-500 focus:shadow-lg focus:shadow-blue-500/10 transition ease-out duration-300 placeholder:text-slate-400 text-base text-slate-500"
+                                    wire:model.lazy="body"
+                                    placeholder="What's in your mind..."
+                                ></textarea>
+                                <div class="text-end">
+                                    <x-button-primary>Save</x-button-primary>
+                                </div>
+                            </form>
                         @else
                             <p class="text-slate-500 text-base">{!! $status->body !!} <a href="{{ route('status.show', $status->slug) }}" class="text-sm text-blue-500 hover:text-blue-600 transition ease-out duration-300">Show detail</a></p>
                         @endif
@@ -50,7 +50,7 @@
                 </div>
             </div>
             {{-- menu --}}
-            @auth
+            @if ($status->user_id === auth()->user()->id)
                 <div x-data="{open: false}" class="relative">
                     <button @click="open = ! open">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -77,7 +77,15 @@
                         </ul>
                     </div>
                 </div>
-            @endauth
+            @endif
         </div>
     @endforeach
+    @if ($limit === count($statuses))
+        <div class="text-center">
+            <button wire:click="loadMore" class="text-blue-500 hover:text-blue-600 transition-all ease-out duration-300">Load more...</button>
+        </div>
+    @endif
+    <div wire:loading wire:target="loadMore" class="text-center">
+        Pease wait...
+    </div>
 </div>

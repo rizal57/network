@@ -8,14 +8,14 @@ use Livewire\Component;
 
 class Statuses extends Component
 {
-    public $statuses, $status_id, $body;
+    public $statuses, $status_id, $body, $limit = 10;
     protected $listeners = [
         'statusPosted' => 'render',
     ];
 
     public function render()
     {
-        $this->statuses = Status::where('user_id', auth()->user()->id)->with('user')->latest()->get();
+        $this->statuses = Status::with('user')->limit($this->limit)->latest()->get();
         // $this->body = $this->statuses->body;
         return view('livewire.statuses');
     }
@@ -39,5 +39,10 @@ class Statuses extends Component
         ]);
 
         $this->status_id = NULL;
+    }
+
+    public function loadMore()
+    {
+        $this->limit += 10;
     }
 }
