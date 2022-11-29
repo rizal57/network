@@ -5,7 +5,7 @@
                 <div class="flex-shrink-0">
                     <img src="http://www.gravatar.com/avatar/?d=mp" class="w-10 h-10 rounded-full" alt="{{ $status->slug }}">
                 </div>
-                <div>
+                <div class="w-full">
                     <div class="flex gap-1 items-center">
                         <h1 class="text-slate-600 font-semibold text-base">{{ auth()->user()->name }}</h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
@@ -14,7 +14,20 @@
                         <span class="text-slate-500 text-sm">{{ $status->created_at->diffForHumans() }}</span>
                     </div>
                     <div>
-                        <p class="text-slate-500 text-base">{!! $status->body !!} <a href="{{ route('status.show', $status->slug) }}" class="text-sm text-blue-500 hover:text-blue-600 transition ease-out duration-300">Show detail</a></p>
+                        @if ($status_id)
+                        <form action="" wire:submit.prevent="updateStatus({{ $status->id }})">
+                            <textarea
+                                class="w-full rounded-md border-slate-400 resize-none focus:border-slate-200 focus:ring-blue-500 focus:shadow-lg focus:shadow-blue-500/10 transition ease-out duration-300 placeholder:text-slate-400 text-base text-slate-500"
+                                wire:model.lazy="body"
+                                placeholder="What's in your mind..."
+                            ></textarea>
+                            <div class="text-end">
+                                <x-button-primary>Save</x-button-primary>
+                            </div>
+                        </form>
+                        @else
+                            <p class="text-slate-500 text-base">{!! $status->body !!} <a href="{{ route('status.show', $status->slug) }}" class="text-sm text-blue-500 hover:text-blue-600 transition ease-out duration-300">Show detail</a></p>
+                        @endif
                     </div>
                     <div class="flex gap-8 items-center mt-4">
                         <a
@@ -37,32 +50,34 @@
                 </div>
             </div>
             {{-- menu --}}
-            <div x-data="{open: false}" class="relative">
-                <button @click="open = ! open">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                    </svg>
-                </button>
-                {{-- dropdown --}}
-                <div x-show="open"
-                    @click.away="open = false"
-                    x-transition:enter="transition ease-out duration-300"
-                    x-transition:enter-start="opacity-0 transform scale-90"
-                    x-transition:enter-end="opacity-100 transform scale-100"
-                    x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 transform scale-100"
-                    x-transition:leave-end="opacity-0 transform scale-90"
-                    class="absolute bg-white shadow-md rounded-md top-0 right-4 border">
-                    <ul>
-                        <li>
-                            <button class="text-slate-500 hover:text-blue-500 hover:bg-slate-100 py-1 px-3 transition duration-300 ease-out w-full text-start text-sm">Edit</button>
-                        </li>
-                        <li>
-                            <button class="text-rose-500 hover:text-blue-500 hover:bg-slate-100 py-1 px-3 transition duration-300 ease-out w-full text-start text-sm">Delete</button>
-                        </li>
-                    </ul>
+            @auth
+                <div x-data="{open: false}" class="relative">
+                    <button @click="open = ! open">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                        </svg>
+                    </button>
+                    {{-- dropdown --}}
+                    <div x-show="open"
+                        @click.away="open = false"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform scale-90"
+                        x-transition:enter-end="opacity-100 transform scale-100"
+                        x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100 transform scale-100"
+                        x-transition:leave-end="opacity-0 transform scale-90"
+                        class="absolute bg-white shadow-md rounded-md top-0 right-4 border">
+                        <ul>
+                            <li>
+                                <button wire:click="editStatus({{ $status->id }})" @click="open = false" class="text-slate-500 hover:text-blue-500 hover:bg-slate-100 py-1 px-3 transition duration-300 ease-out w-full text-start text-sm">Edit</button>
+                            </li>
+                            <li>
+                                <button wire:click="deleteStatus({{ $status->id }})" @click="open = false" class="text-rose-500 hover:text-blue-500 hover:bg-slate-100 py-1 px-3 transition duration-300 ease-out w-full text-start text-sm">Delete</button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            @endauth
         </div>
     @endforeach
 </div>

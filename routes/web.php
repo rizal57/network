@@ -39,7 +39,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::get('password/reset', Email::class)
-    ->name('password.request')->middleware('verified');
+    ->name('password.request');
 
 Route::get('password/reset/{token}', Reset::class)
     ->name('password.reset');

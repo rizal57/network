@@ -7,7 +7,7 @@
 
         <p class="text-xl max-w-lg text-slate-500 mt-8 mb-12">Perluas pertemanan Anda dan temukan berbagai teman dengan network</p>
         <a
-            href="{{ route('timeline') }}"
+            href="{{ route('status.index') }}"
             class="bg-blue-500 shadow-lg shadow-blue-500/30 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full text-sm hover:bg-blue-600 transition ease-out duration-300"
         >
             Let's Go
