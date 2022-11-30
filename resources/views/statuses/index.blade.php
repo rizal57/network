@@ -13,6 +13,9 @@
                     <div class="border border-slate-300 py-2 px-4 rounded-md">
                         <h1 class="text-slate-500 font-semibold text-base mb-3">Recently Join</h1>
                         <livewire:users />
+                        <div class="text-center">
+                            <a href="{{ route('explore.users') }}" class="text-blue-500 hover:text-blue-600 hover:underline transition-all duration-300">Show more</a>
+                        </div>
                     </div>
                 </div>
             </div>
