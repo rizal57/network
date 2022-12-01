@@ -10,11 +10,20 @@
             <div>
                 <form action="" wire:submit.prevent="store">
                     <div>
-                        <textarea
-                            class="w-full rounded-md border-slate-400 resize-none focus:border-slate-200 focus:ring-blue-500 focus:shadow-lg focus:shadow-blue-500/10 transition ease-out duration-300 placeholder:text-slate-400 text-base text-slate-500"
-                            wire:model.lazy="body"
-                            placeholder="What's in your mind..."
-                        ></textarea>
+                        <input type="hidden" wire:model="user_id">
+                        <input type="hidden" wire:model="slug">
+                        <div>
+                            <textarea
+                                class="w-full rounded-md border-slate-400 resize-none focus:border-slate-200 focus:ring-blue-500 focus:shadow-lg focus:shadow-blue-500/10 transition ease-out duration-300 placeholder:text-slate-400 text-base text-slate-500"
+                                wire:model.lazy="body"
+                                placeholder="What's in your mind..."
+                            ></textarea>
+                            @error('body')
+                                <div>
+                                    <p class="text-rose-500 text-sm">{{ $message }}</p>
+                                </div>
+                            @enderror
+                        </div>
                         <div class="text-end">
                             <x-button-primary>Post</x-button-primary>
                         </div>

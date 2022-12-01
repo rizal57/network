@@ -21,11 +21,13 @@ class PostForm extends Component
             'body' => 'required',
         ]);
 
-        Status::create([
+        $data = [
             'body' => $this->body,
             'user_id' => auth()->user()->id,
             'slug' => Str::slug(Str::limit($this->body, 20, '...')),
-        ]);
+        ];
+
+        Status::create($data);
 
         $this->emit('statusPosted');
         $this->body = NULL;
