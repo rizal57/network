@@ -25,6 +25,7 @@
     </head>
 
     <body>
+        <x-navbar />
         @yield('body')
     </body>
 </html>
