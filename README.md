@@ -6,7 +6,7 @@ Ini adalah aplikasi untuk memperluas pertemanan yang dibuat dengan menggunakan t
 
 ![App Screenshot](./project-screenshot/Screenshot_3.png)
 
-## Installation
+## Tutorial cara Setup
 
 ### Install project Laravel
 
