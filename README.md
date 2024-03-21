@@ -6,37 +6,37 @@ Ini adalah aplikasi untuk memperluas pertemanan yang dibuat dengan menggunakan t
 
 ![App Screenshot](./project-screenshot/Screenshot_3.png)
 
-## Tutorial cara Setup
+### Require
+    php 8
+### Installation
 
-### Install project Laravel
-
-Install project dengan laravel installer atau composer
-
-#### Install Laravel dengan laravel installer
+#### Install Dependencies
 
 ```bash
-  laravel new network
-  cd network
+  Composer Install
 ```
 
-#### Install Laravel dengan composer
+#### Create a '.env' File
 
 ```bash
-  composer create-project laravel/laravel network
-  cd network
+    cp .env.example .env
+    php artisan key:generate
 ```
 
-#### Jalankan aplikasi
+### Configure the Database
+
+```bash
+  Open the '.env' file and configure the database settings
+```
+
+### Migrations
+
+```bash
+  php artisan migrate
+```
+
+### Start the Development Server
 
 ```bash
   php artisan serve
-```
-
-### Install TALL stack, Installation (with auth)
-
-```bash
-  composer require livewire/livewire laravel-frontend-presets/tall
-  php artisan ui tall --auth
-  npm install
-  npm run dev
 ```
